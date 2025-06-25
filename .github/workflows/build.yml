@@ -40,4 +40,5 @@ jobs:
             -Dsonar.projectKey=pavithrachandran70_Integrate_Sonar_Cloud_Demo_Spring \
             -Dsonar.organization=pavithrachandran70 \
             -Dsonar.host.url=https://sonarcloud.io \
-            -Dsonar.login=${{f0f8e9d2936157be8bf1491f7d4b9c9d786fd8f8 }}
+            -Dsonar.login=${{ secrets.SONAR_TOKEN}}
+    
