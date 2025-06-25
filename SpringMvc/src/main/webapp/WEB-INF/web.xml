@@ -1,0 +1,33 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+<!--        Declares and maps the Spring DispatcherServlet-->
+<!--//Root element of the web.xml file.-->
+<!--        Everything inside configures your web application.-->
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+  <servlet>
+ <servlet-name>mydispatcher</servlet-name>
+<!--      //The servlet class is DispatcherServlet, the core of Spring MVC.-->
+
+<!--      It handles all incoming HTTP requests and forwards them to appropriate controllers.-->
+  <servlet-class>
+    org.springframework.web.servlet.DispatcherServlet
+  </servlet-class>
+      <init-param>
+          <param-name>contextConfigLocation</param-name>
+          <param-value>/WEB-INF/springconfig.xml</param-value>
+      </init-param>
+      <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+<!--      //Ensures that the DispatcherServlet is loaded when the server starts-->
+<!--      //1 means load at startup-->
+      <servlet-name>mydispatcher</servlet-name>
+<!--      Maps all incoming URLs (/) to the mydispatcher servlet.-->
+
+
+<!--      That means all requests go through the DispatcherServlet → then it decides which controller to call.-->
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+</web-app>
