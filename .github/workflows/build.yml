@@ -29,7 +29,7 @@ jobs:
             ${{ runner.os }}-m2
 
       - name: Build with Maven
-        run: mvn -B clean verify
+        run: cd SpringMvc  mvn -B clean verify
 
       - name: Run SonarCloud Analysis
         env:
@@ -40,4 +40,4 @@ jobs:
             -Dsonar.projectKey=pavithrachandran70_Integrate_Sonar_Cloud_Demo_Spring \
             -Dsonar.organization=pavithrachandran70 \
             -Dsonar.host.url=https://sonarcloud.io \
-            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+            -Dsonar.login=${{f0f8e9d2936157be8bf1491f7d4b9c9d786fd8f8 }}
