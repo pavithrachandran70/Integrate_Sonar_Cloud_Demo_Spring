@@ -2,6 +2,8 @@ package mypack;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +16,7 @@ import java.text.AttributedString;
 @Controller
 @RequestMapping("/student")
 public class StudentController {
+    private static final Logger logger = LoggerFactory.getLogger(StudentController.class);
 
 @InitBinder
 public void initBinder(WebDataBinder dataBinder){
@@ -57,7 +60,8 @@ public String processForm(
         BindingResult bindingResult,
         Model model) {
 
-    System.out.println("BINDING RESULT:"+ bindingResult);
+//    System.out.println("BINDING RESULT:"+ bindingResult);
+    logger.debug("Binding result: {}", bindingResult);
     // Check for validation errors
     if (bindingResult.hasErrors()) {
         System.out.println("Validation errors: " + bindingResult);

@@ -2,6 +2,8 @@ package mypack;
 
 //Handles HTTP requests
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 // This tells Spring that this class is a web controller that handles HTTP requests.
 @Controller
 public class HomeController {
-
+    private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
     //Maps the URL /hello to the getpage() method.
     //
     //When a user accesses http://localhost:8080/hello, this method gets called.
@@ -40,8 +42,9 @@ public class HomeController {
     @RequestMapping("/processForm")
     public String processForm(@RequestParam("StudentName") String name, Model model) {
 
-        System.out.println("Received name: " + name);
+//        System.out.println("Received name: " + name);
         // Add the data to the model
+        logger.info("Received name: {}", name);
         model.addAttribute("StudentName", name);
 
         // Return the view name
