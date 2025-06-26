@@ -15,7 +15,7 @@
     <relativePath/> <!-- Use this if not in multi-module -->
   </parent>
   <properties>
-    <java.version>11</java.version>
+    <java.version>17</java.version>
     <sonar.organization>pavithrachandran70</sonar.organization>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     <sonar.projectKey>pavithrachandran70_Integrate_Sonar_Cloud_Demo_Spring</sonar.projectKey>
@@ -23,18 +23,26 @@
   </properties>
 
   <dependencies>
+
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
     <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-webmvc</artifactId>
-      <version>5.3.23</version>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <version>3.2.4</version>
+      <scope>test</scope>
     </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
+<!--    <dependency>-->
+<!--      <groupId>org.springframework</groupId>-->
+<!--      <artifactId>spring-webmvc</artifactId>-->
+<!--      <version>5.3.23</version>-->
+<!--    </dependency>-->
     <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
     <dependency>
       <groupId>javax.servlet</groupId>
@@ -42,13 +50,26 @@
       <version>4.0.1</version>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>jakarta.servlet</groupId>
+      <artifactId>jakarta.servlet-api</artifactId>
+      <version>6.0.0</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>jstl</artifactId>
+      <version>1.2</version>
+    </dependency>
+
+
     <!-- Jakarta Bean Validation API -->
     <!--  Javax Bean Validation API -->
-    <dependency>
-      <groupId>javax.validation</groupId>
-      <artifactId>validation-api</artifactId>
-      <version>2.0.1.Final</version>
-    </dependency>
+<!--    <dependency>-->
+<!--      <groupId>javax.validation</groupId>-->
+<!--      <artifactId>validation-api</artifactId>-->
+<!--      <version>2.0.1.Final</version>-->
+<!--    </dependency>-->
 
     <!--  Hibernate Validator -->
     <dependency>
@@ -83,6 +104,17 @@
       <version>3.0.0</version>
     </dependency>
 
+    <!-- For unit and integration testing with Spring Boot -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <version>3.2.4</version> <!-- Match your Spring Boot version -->
+      <scope>test</scope>
+    </dependency>
+
+
+
+
     <!-- SLF4J API (already included via Spring Boot, so optional) -->
     <dependency>
       <groupId>org.slf4j</groupId>
@@ -94,7 +126,20 @@
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
     </dependency>
-
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+      <version>RELEASE</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.tomcat.embed</groupId>
+      <artifactId>tomcat-embed-jasper</artifactId>
+    </dependency>
 
   </dependencies>
   <build>
@@ -110,8 +155,12 @@
         <artifactId>spring-boot-maven-plugin</artifactId>
         <version>3.2.4</version>
         <configuration>
-          <mainClass>mypack.Main</mainClass>
+          <mainClass>mypack.SpringMvcApplication</mainClass>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
       </plugin>
       <plugin>
         <groupId>org.jacoco</groupId>
@@ -132,6 +181,11 @@
           </execution>
         </executions>
       </plugin>
+<!--      <plugin>-->
+<!--        <groupId>org.springframework.boot</groupId>-->
+<!--        <artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--      </plugin>-->
+
     </plugins>
   </build>
 </project>

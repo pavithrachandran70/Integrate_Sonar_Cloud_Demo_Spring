@@ -6,15 +6,24 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import javax.servlet.http.HttpServletRequest;
+//import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
+
 
 // This tells Spring that this class is a web controller that handles HTTP requests.
 @Controller
 public class HomeController {
     private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+
+    @GetMapping("/")
+    public String redirectToHello() {
+        return "redirect:/hello"; // You can also return a view name directly if desired
+    }
+
     //Maps the URL /hello to the getpage() method.
     //
     //When a user accesses http://localhost:8080/hello, this method gets called.
