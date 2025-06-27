@@ -41,6 +41,7 @@ jobs:
       - name: Build and analyze with SonarCloud
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+           working-directory:./SpringMvc
         run: |
           mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
             -Dsonar.projectKey=pavithrachandran70_Integrate_Sonar_Cloud_Demo_Spring \
