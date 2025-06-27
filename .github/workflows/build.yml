@@ -1,46 +1,49 @@
-name: Java CI with Maven
+name: SonarCloud Analysis
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
   pull_request:
-    branches: [ main ]
+    types: [opened, synchronize, reopened]
 
 jobs:
   build:
+    name: Build and Analyze with SonarCloud
     runs-on: ubuntu-latest
-    timeout-minutes: 10  
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
-          java-version: '17'
-          distribution: 'temurin'
+          java-version: 17
+          distribution: 'zulu'
 
       - name: Cache Maven packages
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-m2
+          restore-keys: ${{ runner.os }}-m2
 
-      - name: Build with Maven
-        working-directory: SpringMvc
-        run: mvn -B clean verify
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
 
-      - name: Run SonarCloud Analysis
-        working-directory: SpringMvc
+      - name: Build and analyze with SonarCloud
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          set -e  # 🔴 Stops Sonar if any command fails
-          mvn sonar:sonar \
+          mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
             -Dsonar.projectKey=pavithrachandran70_Integrate_Sonar_Cloud_Demo_Spring \
-            -Dsonar.organization=pavithrachandran70 \
+            -Dsonar.organization=pavithrachandran70\
             -Dsonar.host.url=https://sonarcloud.io \
-            -Dsonar.login=${{ secrets.SONAR_TOKEN}}
-    
+            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
