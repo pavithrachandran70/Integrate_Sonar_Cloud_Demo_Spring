@@ -69,7 +69,9 @@ public String processForm(
     }
 
     // Log input data
-    System.out.println("theStudent: " + theStudent.getFirstName() + " " + theStudent.getLastName());
+//    System.out.println("theStudent: " + theStudent.getFirstName() + " " + theStudent.getLastName());
+    logger.info("Submitted student: {} {}", theStudent.getFirstName(), theStudent.getLastName());
+    logger.error("Validation errors: {}", bindingResult);
 
     model.addAttribute("student", theStudent);
     return "studentconfirmation";
